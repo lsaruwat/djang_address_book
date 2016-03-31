@@ -1,0 +1,29 @@
+Code Conventions...
+
+Big part of group projects is writing code in a consistent and readable way.
+	- Helps with debugging
+	- Improves code readability
+	- Makes interfacing with other people's code much easier
+
+They're simple, really
+
+1. Files:
+	A. Descriptive names - addUser.py, editUser.py, deleteUser.py ...
+		One glance and you immediately know what the purpose of the code is, right?
+	B. Camelhumps - addUserIsNamedInCamelCase.py
+		The capital letters at the start of each work make it easier to read the file name.
+
+2. Variables:
+	A. Descriptive names are rad ...
+		for i in array : ...  Not nearly as helpful as...
+		for rows in dbResults
+	B. Descriptions can't be too long ...
+		wellTheyActuallyCanJustBeSmartAboutItAndItWillBeFine = 100
+
+3. Classes:
+	A. Class Names - capitalize first letter ...
+		ClassForThing
+	B. Class Object - use good variable conventions ...
+		classForThing
+
+Feel free to add, change these if you have good reasons and feels to do so. Cheers.
