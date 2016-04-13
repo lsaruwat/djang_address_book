@@ -60,6 +60,6 @@ def template(request):
 		'errors': errors,
 	}
 
-	return render(request, 'template.html', data)
+	return render(request, 'app1/template.html', data)
 
 

@@ -6,11 +6,12 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Grade Book</title></head>
+        <link href="{% static 'app1/css/bootstrap.min.css' %}" rel="stylesheet" />
+        <title>Address Book</title></head>
     </head>
     <body>
         <header>
-            A Grade Book
+            An Address Book
         </header>
         <nav>
             <ul>
@@ -19,15 +20,33 @@
                 <li><a href="/add_new/">Add New Grade</a></li>
             </ul>
         </nav>
-        <div id="main" style="height:300px;">
-            <h1>{{ heading }}</h1>
-            <p> {{ content }} </p>
+        <div class="container">
+            
+            <div class="row">
+                <h1>{{ heading }}</h1>
+                <p> {{ content }} </p>
+            </div>
+            
+            <!--This is the class naming convention for bootstrap which we are using -->
+
+            <div class="row">
+                <div class="col-md-1">
+                    <h4>Id</h4>
+                </div>
+                <div class="col-md-3">
+                    <h4>Name</h4>
+                </div>
+                <div class="col-md-3">
+                    <h4>Phone</h4>
+                </div>
+                <div class="col-md-3">
+                    <h4>Email</h4>
+                </div>
+            </div>
+        
         </div>
-       	<footer>
-			<a href="/index/">Home</a> | <a href="/about/">About</a> | <a href="/contact/">Contact </a>|
-			<div id="copy">
-			&copy; 2016 Ram Basnet
-			</div>
-		</footer>
+        <footer>
+            <a href="/index/">Home</a> | <a href="/about/">About</a> | <a href="/contact/">Contact </a>|
+        </footer>
     </body>
     </html>
