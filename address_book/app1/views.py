@@ -17,7 +17,7 @@ def index(request):
             b = Math.floor(Math.random() * 255);
             var h1s = document.getElementsByTagName("h1");
             h1s[0].setAttribute("style", "color: rgb("+r+","+g+","+b+"); font-size: 100px;");
-            },1000);
+            },400);
     }
 
     </script>
