@@ -11,4 +11,5 @@ urlpatterns = [
 	url(r'^updateUser/$', views.updateUser, name='updateUser'),
 	url(r'^searchUser/$', views.searchUser, name='searchUser'),
 	url(r'^template/$', views.template, name='template'),
+	url(r'^viewAll/$', views.viewAll, name='viewAll'),
 ]

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Student
 
 
 # Create your views here.
@@ -93,5 +94,19 @@ def template(request):
     }
 
     return render(request, 'app1/template.html', data)
+
+def viewAll(request, user=None):
+    errors=[]
+    query_result = Student.objects.all()
+    #html = "View all students here"
+    data = {
+        'heading': 'View All Contacts',
+        'content':'The following is a list of all contacts',
+        'user':user,
+        'errors':errors,
+        'query_result': query_result,
+    }
+
+    return render(request,'app1/db_Display_Template.html',data)
 
 
