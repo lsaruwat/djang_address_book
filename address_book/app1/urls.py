@@ -12,4 +12,7 @@ urlpatterns = [
 	url(r'^searchUser/$', views.searchUser, name='searchUser'),
 	url(r'^template/$', views.template, name='template'),
 	url(r'^viewAll/$', views.viewAll, name='viewAll'),
+	url(r'^addStudent/([0-9]*)', views.addStudent, name='addStudent'),
 ]
+
+

@@ -41,38 +41,29 @@
 
             <!--This is the class naming convention for bootstrap which we are using -->
 
-            <table>
-                <tr class ="row">
-                    <td class="col-md-1">
-                        <h3>ID</h3>
-                    </td>
-                    <td class="col-md-3">
-                        <h3>Name</h3>
-                    </td>
-                    <td class ="col-md-3">
-                            <h3>Phone</h3>
-                    </td>
-                    <td class="col-md-3">
-                            <h3>Email</h3>
-                    </td>
-                </tr>
-                {% for item in query_result %}
-                <tr class ="row">
-                    <td class="col-md-1">
-                            {{ item.id }}
-                    </td>
-                    <td class="col-md-3">
-                            {{ item.first_name }} {{ item.last_name }}
-                    </td>
-                    <td class="col-md-3">
-                            {{ item.phone }}
-                    </td>
-                    <td class="col-md-3">
-                        {{ item.email }}
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
+            {% if errors %}
+                <ul>
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form role="form" action="{% url 'addStudent' student.id %}" method="post">
+                {% csrf_token %}
+                <label>First Name: *</label>
+                <input id="first_name" type="text" name="first_name" value="{{ student.first_name }}" ><br />
+                <label>Last Name: *</label>
+                <input id="last_name" type="text" name="last_name" value="{{ student.last_name }}" ><br />
+                <label>Email: *</label>
+                <input id="email" type="text" name="email" value="{{ student.email }}" ><br />
+                <label>Phone: *</label>
+                <input id="phone" type="text" name="phone" value="{{ student.phone }}" ><br />
+                <div>
+                    <button type="submit">Save Changes</button>
+                </div>
+            </form>
+
 
         </div>
         <footer class="navbar navbar-inverse navbar-fixed-bottom">
