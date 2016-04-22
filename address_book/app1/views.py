@@ -32,26 +32,13 @@ def home(request):
 
     return HttpResponse(html)
 
-def insertUser(request, user=None):
-    #html= "insert user here"
-    errors = []
-    user = "Zack"
-    data = {
-        'heading': 'Insert a New User',
-        'content': 'Fill in the following information',
-        'user' : user,
-        'errors': errors,
-    }
-
-    return render(request, 'app1/template.html', data)
-
 def deleteUser(request, user=None):
     #html= "delete user here"
     errors = []
 
     data = {
-        'heading': 'Delete a User',
-        'content': 'Chooses which User to Delete',
+        'heading': 'Delete a Contact',
+        'content': 'Chooses which Contact to Delete',
         'user' : user,
         'errors': errors,
     }
@@ -63,7 +50,7 @@ def updateUser(request, user=None):
     errors = []
 
     data = {
-        'heading': 'Update User Information',
+        'heading': 'Update Contact Information',
         'content': 'Fill in the following UPDATED information',
         'user' : user,
         'errors': errors,
@@ -76,7 +63,7 @@ def searchUser(request, user=None):
     errors = []
 
     data = {
-        'heading': 'Search for a User',
+        'heading': 'Search for a Contact',
         'content': 'Fill in the following information',
         'user' : user,
         'errors': errors,
@@ -109,7 +96,7 @@ def viewAll(request, user=None):
 
     return render(request,'app1/db_Display_Template.html',data)
 
-def addStudent(request, contact_id=None):
+def addUser(request, contact_id=None):
     errors = []
     if request.method == 'POST':
         # handle data posted from the from
@@ -134,7 +121,7 @@ def addStudent(request, contact_id=None):
             return render(request, 'app1/new_Student.html', data)
         else:
             if contact_id: # checks to see if student id was provided and if so sets that student to what we are editing
-                student = Student.objects.get(pk=contact_id)
+                student = Student.objects.get(pk=id)
             else:
                 student = Student() # if no contact id is provided, create a new student object
             student.first_name = request.POST.get('first_name')
@@ -157,7 +144,7 @@ def addStudent(request, contact_id=None):
             }
         else:
             # edit existing student
-            student = Student.objects.get(pk=contact_id)
+            student = Student.objects.get(pk=id)
             data = {
                 'heading': 'Edit Contact',
                 'content': 'Update the following information',
@@ -166,5 +153,7 @@ def addStudent(request, contact_id=None):
             }
 
         return render(request, 'app1/new_Student.html', data)
+
+
 
 

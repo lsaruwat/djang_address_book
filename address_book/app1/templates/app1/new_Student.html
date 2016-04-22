@@ -18,11 +18,10 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/home/">Home</a></li>
                     <li><a href="/searchUser/">Search</a></li>
-                    <li><a href="/insertUser/">Add User</a></li>
-                    <li><a href="/updateUser/">Update User</a></li>
-                    <li><a href="/deleteUser/">Remove User</a></li>
-                    <li><a href="/viewAll/">View All Users</a></li>
-                    <li><a href="/addStudent/">New Contact</a></li>
+                    <li><a href="/updateUser/">Update Contact</a></li>
+                    <li><a href="/deleteUser/">Remove Contact</a></li>
+                    <li><a href="/viewAll/">View All Contacts</a></li>
+                    <li><a href="/addUser/">New Contact</a></li>
                 </ul>
                 <form class="navbar-form navbar-right" role="search">
                 <div class="form-group">
@@ -49,18 +48,26 @@
                 </ul>
             {% endif %}
 
-            <form role="form" action="{% url 'addStudent' student.id %}" method="post">
+            <form role="form" action="{% url 'addUser' student.id %}" method="post">
                 {% csrf_token %}
-                <label>First Name: *</label>
-                <input id="first_name" type="text" name="first_name" value="{{ student.first_name }}" ><br />
-                <label>Last Name: *</label>
-                <input id="last_name" type="text" name="last_name" value="{{ student.last_name }}" ><br />
-                <label>Email: *</label>
-                <input id="email" type="text" name="email" value="{{ student.email }}" ><br />
-                <label>Phone: *</label>
-                <input id="phone" type="text" name="phone" value="{{ student.phone }}" ><br />
+                <label>First Name: *
+                    <input id="first_name" type="text" name="first_name" value="{{ student.first_name }}" >
+                </label><br>
+                <label>Last Name: *
+                    <input id="last_name" type="text" name="last_name" value="{{ student.last_name }}" >
+                </label><br>
+
+                <label>Email: *
+                    <input id="email" type="email" name="email" value="{{ student.email }}" >
+                </label><br>
+
+                <label>Phone: *
+                    <input id="phone" type="tel" name="phone" value="{{ student.phone }}" >
+                </label><br>
+
                 <div>
                     <button type="submit">Save Changes</button>
+                    <button type="reset">Reset Fields</button>
                 </div>
             </form>
 
