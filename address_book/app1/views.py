@@ -28,7 +28,7 @@ def home(request, user=None):
         'errors': errors,
     }
 
-    return render(request, 'app1/template.html', data)
+    return render(request, 'app1/home.html', data)
 
 def deleteUser(request, user=None):
     #html= "delete user here"
@@ -67,7 +67,7 @@ def searchUser(request, user=None):
         'errors': errors,
     }
 
-    return render(request, 'app1/template.html', data)
+    return render(request, 'app1/search.html', data)
 
 def template(request):
     errors = []
