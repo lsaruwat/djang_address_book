@@ -4,33 +4,31 @@ from .models import Student
 
 
 # Create your views here.
-def index(request):
-    global header
-    user = "Logan"
-    html = """<h1>This is a website. Hello %s</h1>
-    <script type="text/javascript">
-    window.addEventListener("load", colorStuff, false);
+def index(request, user=None):
+    #html= "delete user here"
+    errors = []
 
-    function colorStuff(){
-        setInterval( function(){
-            r = Math.floor(Math.random() * 255);
-            g = Math.floor(Math.random() * 255);
-            b = Math.floor(Math.random() * 255);
-            var h1s = document.getElementsByTagName("h1");
-            h1s[0].setAttribute("style", "color: rgb("+r+","+g+","+b+"); font-size: 100px;");
-            },400);
+    data = {
+        'heading': 'Delete a Contact',
+        'content': 'Chooses which Contact to Delete',
+        'user' : user,
+        'errors': errors,
     }
 
-    </script>
-    """%(user)
-    return HttpResponse(html)
+    return render(request, 'app1/template.html', data)
 
-def home(request):
-    global header
-    user = "Logan"
-    html = "<h1>Welcome to your address book %s</h1>"%user
+def home(request, user=None):
+    #html= "delete user here"
+    errors = []
 
-    return HttpResponse(html)
+    data = {
+        'heading': 'Address Book',
+        'content': 'This is an address book',
+        'user' : user,
+        'errors': errors,
+    }
+
+    return render(request, 'app1/template.html', data)
 
 def deleteUser(request, user=None):
     #html= "delete user here"
