@@ -4,7 +4,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-	url(r'^$', views.index, name='home'),
+	url(r'^$', views.home, name='home'),
 	url(r'^home/$', views.home, name='home'),
 	url(r'^deleteUser/$', views.deleteUser, name='deleteUser'),
 	url(r'^updateUser/$', views.updateUser, name='updateUser'),
@@ -15,6 +15,8 @@ urlpatterns = [
 	url(r'^template/$', views.template, name='template'),
 	url(r'^viewAll/$', views.viewAll, name='viewAll'),
 	url(r'^addUser/([0-9]*)', views.addUser, name='addUser'),
+	url(r'^login/$', views.login, name='login'),
+	url(r'^verify/$', views.verifyCredentials, name='verify'),
 ]
 
 
