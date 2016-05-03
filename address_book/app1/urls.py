@@ -9,6 +9,7 @@ urlpatterns = [
 	url(r'^deleteUser/$', views.deleteUser, name='deleteUser'),
 	url(r'^updateUser/$', views.updateUser, name='updateUser'),
 	url(r'^saveUser/([0-9]*)', views.saveUser, name='saveUser'),
+	url(r'^delete/([0-9]*)', views.delete, name='delete'),
 	url(r'^searchUser/$', views.searchUser, name='searchUser'),
 	url(r'^template/$', views.template, name='template'),
 	url(r'^viewAll/$', views.viewAll, name='viewAll'),

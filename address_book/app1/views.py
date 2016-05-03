@@ -31,14 +31,48 @@ def home(request, user=None):
 def deleteUser(request, user=None):
     errors = []
 
+    query = Student.objects.all()
     data = {
         'heading': 'Delete a Contact',
-        'content': 'Chooses which Contact to Delete',
+        'content': 'Choose which Contact to Delete',
         'user' : user,
         'errors': errors,
+        'query_result': query,
     }
 
-    return render(request, 'app1/template.html', data)
+    return render(request, 'app1/delete.html', data)
+
+def delete(request, userId=None):
+    errors = []
+
+    if request.method == 'POST':
+
+        #do form validation on back end
+        if not userId:
+            errors.append("No user selected!")
+
+        data = {'heading': 'Thank You!',
+                'content': 'Contact Deleted!',
+                'errors': errors,
+            }
+        if errors:
+            data['heading'] = 'Delete a Contact'
+            data['content'] = 'Choose which Contact to Delete'
+            return render(request, 'app1/delete.html', data)
+        else:
+            if userId:
+                student = Student.objects.get(pk=userId)
+                first = student.first_name
+                last = student.last_name
+                student.delete()
+                #student.save()
+
+                query = Student.objects.all()
+                data['heading'] = 'Success'
+                data['content'] =  '%s %s deleted successfully!'%(first, last)
+                data['student'] = student
+                data['query_result'] = query
+            return render(request, 'app1/delete.html', data)
 
 def updateUser(request, user=None):
     errors = []
@@ -56,7 +90,7 @@ def updateUser(request, user=None):
 
 def saveUser(request, userId=None):
     errors = []
-    
+
     if request.method == 'POST':
 
         #do form validation on back end
