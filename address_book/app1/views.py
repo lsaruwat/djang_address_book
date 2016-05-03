@@ -5,12 +5,11 @@ from .models import Student
 
 # Create your views here.
 def index(request, user=None):
-    #html= "delete user here"
     errors = []
 
     data = {
-        'heading': 'Delete a Contact',
-        'content': 'Chooses which Contact to Delete',
+        'heading': 'Address Book',
+        'content': 'This is an address book',
         'user' : user,
         'errors': errors,
     }
@@ -18,7 +17,6 @@ def index(request, user=None):
     return render(request, 'app1/template.html', data)
 
 def home(request, user=None):
-    #html= "delete user here"
     errors = []
 
     data = {
@@ -31,7 +29,6 @@ def home(request, user=None):
     return render(request, 'app1/home.html', data)
 
 def deleteUser(request, user=None):
-    #html= "delete user here"
     errors = []
 
     data = {
@@ -44,20 +41,59 @@ def deleteUser(request, user=None):
     return render(request, 'app1/template.html', data)
 
 def updateUser(request, user=None):
-    #html= "update user here"
     errors = []
 
+    query_result = Student.objects.all()
     data = {
         'heading': 'Update Contact Information',
         'content': 'Fill in the following UPDATED information',
         'user' : user,
         'errors': errors,
+        'query_result': query_result,
     }
 
-    return render(request, 'app1/template.html', data)
+    return render(request, 'app1/update.html', data)
+
+def saveUser(request, userId=None):
+    errors = []
+    
+    if request.method == 'POST':
+
+        #do form validation on back end
+        if not request.POST.get('first_name', ''):
+            errors.append('Enter first name.')
+        if not request.POST.get('last_name'):
+            errors.append('Enter last name.')
+        if not request.POST.get('phone', ''):
+            errors.append('Enter phone')
+        if not request.POST.get('email', ''):
+            errors.append('Enter email')
+
+        data = {'heading': 'Thank You!',
+                'content': 'Your entry updated!',
+                'errors': errors,
+            }
+        if errors:
+            data['heading'] = 'Update Contact Information'
+            data['content'] = 'Fill in the following UPDATED information'
+            return render(request, 'app1/update.html', data)
+        else:
+            if userId:
+                student = Student.objects.get(pk=userId)
+                student.first_name = request.POST.get('first_name')
+                student.last_name = request.POST.get('last_name')
+                student.phone = (request.POST.get('phone'))
+                student.email = (request.POST.get('email'))
+                student.save()
+
+                query_result = Student.objects.all()
+                data['heading'] = 'Success'
+                data['content'] =  '%s %s updated successfully!'%(request.POST.get('first_name'),request.POST.get('last_name'))
+                data['student'] = student
+                data['query_result'] = query_result
+            return render(request, 'app1/update.html', data)
 
 def searchUser(request, user=None):
-    #html= "search for users here"
     errors = []
 
     data = {
@@ -83,7 +119,7 @@ def template(request):
 def viewAll(request, user=None):
     errors=[]
     query_result = Student.objects.all()
-    #html = "View all students here"
+    
     data = {
         'heading': 'View All Contacts',
         'content':'The following is a list of all contacts',
