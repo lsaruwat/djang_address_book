@@ -139,6 +139,33 @@ def searchUser(request, user=None):
 
     return render(request, 'app1/search.html', data)
 
+def search(request):
+    errors = []
+
+    if request.method == 'POST':
+        #do form validation on back end
+        if not request.POST.get('search', ''):
+            errors.append('Enter a term to search.')
+
+        data = {'heading': 'Search Results',
+                'content': 'These are your search results',
+                'errors': errors,
+            }
+        if errors:
+            data['heading'] = 'Search for a Contact'
+            data['content'] = 'Fill in the following information'
+            return render(request, 'app1/search.html', data)
+        else:
+            search = request.POST.get("search")
+            if search:
+
+                students = Student.objects.filter(first_name__contains = search) or Student.objects.filter(last_name__contains = search) or Student.objects.filter(phone__contains = search) or Student.objects.filter(email__contains = search)
+
+                data['heading'] = 'Search Results'
+                data['content'] =  'These are your search results for %s'%search
+                data['query_result'] = students
+            return render(request, 'app1/search.html', data)
+
 def template(request):
     errors = []
 
