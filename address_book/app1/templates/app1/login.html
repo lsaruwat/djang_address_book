@@ -44,7 +44,7 @@
             {% if errors %}
             {% for error in errors %}
             <div class="row">
-                <div class="col-12-med">{{ error }}</div>
+                <div class="col-12-med" style="color: red;">{{ error }}</div>
             </div>
             {% endfor %}
         {% endif %}
@@ -57,7 +57,7 @@
             <div class="row">
                 <label for="password">Password:</label> 
                 <div class="col-6-med">
-                    <input type="text" name="password" id="password">
+                    <input type="password" name="password" id="password">
                 </div>
             </div>
             <div class="row">

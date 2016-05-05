@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Student
-
+from django.core.urlresolvers import reverse
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request, user=None):
@@ -16,6 +18,7 @@ def index(request, user=None):
 
     return render(request, 'app1/template.html', data)
 
+@login_required(login_url='/login/')
 def home(request, user=None):
     errors = []
 
@@ -28,6 +31,7 @@ def home(request, user=None):
 
     return render(request, 'app1/home.html', data)
 
+@login_required(login_url='/login/')
 def deleteUser(request, user=None):
     errors = []
 
@@ -41,6 +45,7 @@ def deleteUser(request, user=None):
     }
 
     return render(request, 'app1/delete.html', data)
+
 
 def delete(request, userId=None):
     errors = []
@@ -74,6 +79,7 @@ def delete(request, userId=None):
                 data['query_result'] = query
             return render(request, 'app1/delete.html', data)
 
+@login_required(login_url='/login/')
 def updateUser(request, user=None):
     errors = []
 
@@ -87,6 +93,7 @@ def updateUser(request, user=None):
     }
 
     return render(request, 'app1/update.html', data)
+
 
 def saveUser(request, userId=None):
     errors = []
@@ -127,6 +134,7 @@ def saveUser(request, userId=None):
                 data['query_result'] = query_result
             return render(request, 'app1/update.html', data)
 
+
 def searchUser(request, user=None):
     errors = []
 
@@ -139,6 +147,7 @@ def searchUser(request, user=None):
 
     return render(request, 'app1/search.html', data)
 
+@login_required(login_url='/login/')
 def search(request):
     errors = []
 
@@ -166,6 +175,7 @@ def search(request):
                 data['query_result'] = students
             return render(request, 'app1/search.html', data)
 
+
 def template(request):
     errors = []
 
@@ -177,6 +187,7 @@ def template(request):
 
     return render(request, 'app1/template.html', data)
 
+@login_required(login_url='/login/')
 def viewAll(request, user=None):
     errors=[]
     query_result = Student.objects.all()
@@ -191,6 +202,7 @@ def viewAll(request, user=None):
 
     return render(request,'app1/db_Display_Template.html',data)
 
+@login_required(login_url='/login/')
 def addUser(request, contact_id=None):
     errors = []
     if request.method == 'POST':
@@ -249,7 +261,7 @@ def addUser(request, contact_id=None):
 
         return render(request, 'app1/new_Student.html', data)
 
-def login(request, user=None):
+def loginPage(request, user=None):
     errors = []
 
     data = {
@@ -261,33 +273,38 @@ def login(request, user=None):
 
     return render(request, 'app1/login.html', data)
 
-
 def verifyCredentials(request):
     errors = []
+    context = {}
 
     if request.method == 'POST':
-        #do form validation on back end
-        if not request.POST.get('search', ''):
-            errors.append('Enter a term to search.')
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        if not username:
+            errors.append('Username is required')
+        if not password:
+            errors.append('Password is required')
 
-        data = {'heading': 'Search Results',
-                'content': 'These are your search results',
-                'errors': errors,
-            }
-        if errors:
-            data['heading'] = 'Search for a Contact'
-            data['content'] = 'Fill in the following information'
-            return render(request, 'app1/search.html', data)
-        else:
-            search = request.POST.get("search")
-            if search:
+        if not errors:
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    context = {
+                        'heading': 'Address Book',
+                        'content': 'Welcome to your custom address book',
+                        'user' : user
+                    }
+                    return render(request, 'app1/home.html', context)
+                else:
+                    errors.append('This account has been disabled.')
+            else:
+                errors.append('Invalid username or password.')
 
-                students = Student.objects.filter(first_name__contains = search) or Student.objects.filter(last_name__contains = search) or Student.objects.filter(phone__contains = search) or Student.objects.filter(email__contains = search)
-
-                data['heading'] = 'Search Results'
-                data['content'] =  'These are your search results for %s'%search
-                data['query_result'] = students
-            return render(request, 'app1/search.html', data)
+        context['errors'] = errors
+        return render(request, 'app1/login.html', context)
+    else:
+        login(request)
 
 
 

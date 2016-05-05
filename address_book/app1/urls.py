@@ -15,7 +15,7 @@ urlpatterns = [
 	url(r'^template/$', views.template, name='template'),
 	url(r'^viewAll/$', views.viewAll, name='viewAll'),
 	url(r'^addUser/([0-9]*)', views.addUser, name='addUser'),
-	url(r'^login/$', views.login, name='login'),
+	url(r'^login/$', views.loginPage, name='loginPage'),
 	url(r'^verify/$', views.verifyCredentials, name='verify'),
 ]
 
