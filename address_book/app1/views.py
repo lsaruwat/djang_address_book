@@ -203,6 +203,68 @@ def viewAll(request, user=None):
     return render(request,'app1/db_Display_Template.html',data)
 
 @login_required(login_url='/login/')
+def viewAllFirstName(request, user=None):
+    errors=[]
+    query_result = Student.objects.all().order_by('first_name')
+
+    data = {
+        'heading': 'View All Contacts',
+        'content':'The following is a list of all contacts',
+        'user':user,
+        'errors':errors,
+        'query_result': query_result,
+    }
+
+    return render(request,'app1/db_Display_Template.html',data)
+
+@login_required(login_url='/login/')
+def viewAllLastName(request, user=None):
+    errors=[]
+    query_result = Student.objects.all().order_by('last_name')
+
+    data = {
+        'heading': 'View All Contacts',
+        'content':'The following is a list of all contacts',
+        'user':user,
+        'errors':errors,
+        'query_result': query_result,
+    }
+
+    return render(request,'app1/db_Display_Template.html',data)
+
+
+@login_required(login_url='/login/')
+def viewAllPhone(request, user=None):
+    errors=[]
+    query_result = Student.objects.all().order_by('phone')
+
+    data = {
+        'heading': 'View All Contacts',
+        'content':'The following is a list of all contacts',
+        'user':user,
+        'errors':errors,
+        'query_result': query_result,
+    }
+
+    return render(request,'app1/db_Display_Template.html',data)
+
+@login_required(login_url='/login/')
+def viewAllEmail(request, user=None):
+    errors=[]
+    query_result = Student.objects.all().order_by('email')
+
+    data = {
+        'heading': 'View All Contacts',
+        'content':'The following is a list of all contacts',
+        'user':user,
+        'errors':errors,
+        'query_result': query_result,
+    }
+
+    return render(request,'app1/db_Display_Template.html',data)
+
+
+@login_required(login_url='/login/')
 def addUser(request, contact_id=None):
     errors = []
     if request.method == 'POST':
