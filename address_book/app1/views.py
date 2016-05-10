@@ -37,14 +37,13 @@ def home(request, user=None):
     return render(request, 'app1/home.html', data)
 
 @login_required(login_url='/login/')
-def deleteUser(request, user=None):
+def deleteUser(request):
     errors = []
 
     query = Student.objects.all()
     data = {
         'heading': 'Delete a Contact',
         'content': 'Choose which Contact to Delete',
-        'user' : user,
         'errors': errors,
         'query_result': query,
     }
@@ -85,14 +84,13 @@ def delete(request, userId=None):
             return render(request, 'app1/delete.html', data)
 
 @login_required(login_url='/login/')
-def updateUser(request, user=None):
+def updateUser(request):
     errors = []
 
     query_result = Student.objects.all()
     data = {
         'heading': 'Update Contact Information',
         'content': 'Fill in the following UPDATED information',
-        'user' : user,
         'errors': errors,
         'query_result': query_result,
     }
@@ -140,13 +138,12 @@ def saveUser(request, userId=None):
             return render(request, 'app1/update.html', data)
 
 @login_required(login_url='/login/')
-def searchUser(request, user=None):
+def searchUser(request):
     errors = []
 
     data = {
         'heading': 'Search for a Contact',
         'content': 'Fill in the following information',
-        'user' : user,
         'errors': errors,
     }
 
@@ -193,14 +190,13 @@ def template(request):
     return render(request, 'app1/template.html', data)
 
 @login_required(login_url='/login/')
-def viewAll(request, user=None):
+def viewAll(request):
     errors=[]
     query_result = Student.objects.all()
     
     data = {
         'heading': 'View All Contacts',
         'content':'The following is a list of all contacts',
-        'user':user,
         'errors':errors,
         'query_result': query_result,
     }
