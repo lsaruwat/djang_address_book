@@ -24,13 +24,12 @@ def index(request, user=None):
     return render(request, 'app1/template.html', data)
 
 @login_required(login_url='/login/')
-def home(request, user=None):
+def home(request):
     errors = []
 
     data = {
         'heading': 'Address Book',
         'content': 'This is an address book',
-        'user' : user,
         'errors': errors,
     }
 
