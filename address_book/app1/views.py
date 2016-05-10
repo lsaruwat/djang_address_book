@@ -368,6 +368,18 @@ def verifyCredentials(request):
     else:
         login(request)
 
+def logoutThing(request, user=None): # logout renamed because there is a built in logout function
+    errors = []
+    logout(request)
+    data = {
+        'heading': 'Logged Out',
+        'content': 'You have just logged out',
+        'user' : user,
+        'errors': errors,
+    }
+
+    return render(request, 'app1/login.html', data)
+
 
 
 
