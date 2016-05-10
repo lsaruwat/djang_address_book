@@ -139,7 +139,7 @@ def saveUser(request, userId=None):
                 data['query_result'] = query_result
             return render(request, 'app1/update.html', data)
 
-
+@login_required(login_url='/login/')
 def searchUser(request, user=None):
     errors = []
 
