@@ -1,3 +1,8 @@
+#Logan Saratuwari, Charles Bisbee, Zach Lovergne
+#This is a django web application designed to function as an address book
+#There is functionality to add, view, create, edit, and sort contacts
+#This .py file manages all of the url's for the project
+
 from django.conf.urls import url
 
 
