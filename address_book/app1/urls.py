@@ -25,6 +25,7 @@ urlpatterns = [
 	url(r'^viewAllEmail/$', views.viewAllEmail, name='viewAllEmail'),
 	url(r'^addUser/([0-9]*)', views.addUser, name='addUser'),
 	url(r'^login/$', views.loginPage, name='loginPage'),
+	url(r'^logoutThing/$', views.logoutThing, name='logoutThing'),
 	url(r'^verify/$', views.verifyCredentials, name='verify'),
 ]
 
